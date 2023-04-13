@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useEffect, useState } from "react";
+import ProfileGrid from "./components/Grid/ProfileGrid";
+import { fetchProfiles } from "./Api/Api";
+import Loader from "./components/Loader/Loader";
+export default function App() {
+  const [profiles, setProfiles] = useState([]);
+  useEffect(() => {
+    fetchProfiles().then((data) => {
+      setProfiles(data);
+    });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {profiles.length === 0 && <Loader />}
+      <ProfileGrid profiles={profiles} />
     </div>
   );
 }
-
-export default App;
