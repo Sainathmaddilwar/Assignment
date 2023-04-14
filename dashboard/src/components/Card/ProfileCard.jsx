@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import styles from "../Card/ProfileCard.module.css";
 import {
   EditOutlined,
@@ -7,12 +8,40 @@ import {
   GlobalOutlined,
   PhoneOutlined,
   MailOutlined,
+  HeartFilled,
+  DeleteFilled,
 } from "@ant-design/icons";
-import { Avatar, Card } from "antd";
+import { Modal, Card, Form } from "antd";
+import ProfileForm from "../Form/ProfileForm";
 const { Meta } = Card;
 const ProfileCard = ({ profile }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+  const [form] = Form.useForm();
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    form.resetFields();
+    setIsModalOpen(false);
+  };
+  const changeColor = () => {
+    setIsActive((preve) => !preve);
+  };
   return (
     <div className={styles.card}>
+      <Modal
+        title="Form"
+        open={isModalOpen}
+        onOk={form.submit}
+        onCancel={handleCancel}
+      >
+        <ProfileForm
+          form={form}
+          setIsModalOpen={setIsModalOpen}
+          profile={profile}
+        />
+      </Modal>
       <Card
         style={{
           width: 300,
@@ -25,9 +54,22 @@ const ProfileCard = ({ profile }) => {
           />
         }
         actions={[
-          <HeartOutlined key="like" onClick={(e) => console.log(e.target)} />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
+          isActive ? (
+            <HeartOutlined
+              key="like"
+              onClick={changeColor}
+              style={{ color: "red" }}
+            />
+          ) : (
+            <HeartFilled
+              key="like"
+              onClick={changeColor}
+              style={{ color: "red" }}
+            />
+          ),
+
+          <EditOutlined key="edit" onClick={showModal} />,
+          <DeleteFilled key="delete" />,
         ]}
       >
         <div>
