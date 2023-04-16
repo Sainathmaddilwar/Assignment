@@ -23,7 +23,7 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
     });
     dispatch(setProfiles(newState));
     setIsModalOpen(false);
-    form.resetFields();
+    // form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -44,9 +44,13 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
           maxWidth: 600,
         }}
         initialValues={{
+          // eslint-disable-next-line
           ["name"]: profile.name,
+          // eslint-disable-next-line
           ["email"]: profile.email,
+          // eslint-disable-next-line
           ["phone"]: profile.phone,
+          // eslint-disable-next-line
           ["website"]: profile.website,
         }}
         onFinish={onFinish}
