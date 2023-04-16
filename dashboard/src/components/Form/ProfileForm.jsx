@@ -1,8 +1,27 @@
 import React from "react";
 import { Form, Input } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfiles } from "../../redux/actions/ProfileActions";
 function ProfileForm({ form, setIsModalOpen, profile }) {
+  // console.log(profile);
+  const profiles = useSelector((state) => state.allProfiles.profiles);
+  const dispatch = useDispatch();
   const onFinish = (values) => {
     console.log("Success:", values);
+
+    const newState = profiles.map((obj) => {
+      if (obj.id === profile.id) {
+        return {
+          ...obj,
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          website: values.website,
+        };
+      }
+      return obj;
+    });
+    dispatch(setProfiles(newState));
     setIsModalOpen(false);
     form.resetFields();
   };
@@ -25,7 +44,10 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
           maxWidth: 600,
         }}
         initialValues={{
-          remember: true,
+          ["name"]: profile.name,
+          ["email"]: profile.email,
+          ["phone"]: profile.phone,
+          ["website"]: profile.website,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -41,12 +63,12 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
             },
           ]}
         >
-          <Input defaultValue={profile.name} />
+          <Input />
         </Form.Item>
 
         <Form.Item
           label="Email"
-          name="Email"
+          name="email"
           rules={[
             {
               type: "email",
@@ -58,7 +80,7 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
             },
           ]}
         >
-          <Input defaultValue={profile.email} />
+          <Input />
         </Form.Item>
         <Form.Item
           label="Phone"
@@ -70,7 +92,7 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
             },
           ]}
         >
-          <Input defaultValue={profile.phone} />
+          <Input />
         </Form.Item>
         <Form.Item
           label="Website"
@@ -82,7 +104,7 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
             },
           ]}
         >
-          <Input defaultValue={profile.website} />
+          <Input />
         </Form.Item>
         <Form.Item
           wrapperCol={{
