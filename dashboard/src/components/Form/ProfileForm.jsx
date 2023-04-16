@@ -23,7 +23,7 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
     });
     dispatch(setProfiles(newState));
     setIsModalOpen(false);
-    form.resetFields();
+//     form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
