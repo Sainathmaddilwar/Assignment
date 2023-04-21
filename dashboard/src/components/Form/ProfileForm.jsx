@@ -23,7 +23,11 @@ function ProfileForm({ form, setIsModalOpen, profile }) {
     });
     dispatch(setProfiles(newState));
     setIsModalOpen(false);
+<<<<<<< HEAD
     // form.resetFields();
+=======
+//     form.resetFields();
+>>>>>>> 9d4c010a4f983b0f7a2610bb16f6dce66e6fe74c
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
