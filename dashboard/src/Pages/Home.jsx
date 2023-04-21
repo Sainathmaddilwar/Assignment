@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProfiles } from "../redux/actions/ProfileActions";
 
 import ProfileGrid from "../components/Grid/ProfileGrid";
+import SearchBar from "../components/SearchBar/SearchBar";
 function Home() {
   const profiles = useSelector((state) => state.allProfiles.profiles);
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function Home() {
   return (
     <div>
       {profiles.length === 0 && <Loader />}
+      <SearchBar />
       <ProfileGrid />
     </div>
   );
