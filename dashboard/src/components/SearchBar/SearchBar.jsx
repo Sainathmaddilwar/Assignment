@@ -19,7 +19,11 @@ const SearchBar = () => {
     const filteredData = profiles.filter((profile) =>
       profile.name.toLowerCase().includes(value)
     );
-    dispatch(setProfiles(filteredData));
+    if (filteredData.length === 0) {
+      alert("user not found");
+    } else {
+      dispatch(setProfiles(filteredData));
+    }
   };
   return (
     <div className={styles.searchBar}>
@@ -29,7 +33,8 @@ const SearchBar = () => {
           allowClear
           onSearch={onSearch}
           style={{
-            width: 400,
+            width: 300,
+            padding: "20px 20px",
           }}
         />
       </Space>
