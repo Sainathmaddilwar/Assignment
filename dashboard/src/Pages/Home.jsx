@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { fetchProfiles } from "../Api/Api";
 import Loader from "../components/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { setProfiles } from "../redux/actions/ProfileActions";
-
+// import { setProfiles } from "../redux/actions/ProfileActions";
+import { setProfiles } from "../features/profileSlice";
 import ProfileGrid from "../components/Grid/ProfileGrid";
 import SearchBar from "../components/SearchBar/SearchBar";
 function Home() {
@@ -15,6 +15,7 @@ function Home() {
   useEffect(() => {
     fetchProfiles().then((data) => {
       //   setProfilesx(data);
+      console.log(data);
       dispatch(setProfiles(data));
     });
     // eslint-disable-next-line

@@ -1,26 +1,12 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { setProfiles } from "../../redux/actions/ProfileActions";
+import { useDispatch } from "react-redux";
+import { editProfile } from "../../features/profileSlice";
 function ProfileForm({ form, setIsModalOpen, profile }) {
   // console.log(profile);
-  const profiles = useSelector((state) => state.allProfiles.profiles);
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log("Success:", values);
-    const newState = profiles.map((obj) => {
-      if (obj.id === profile.id) {
-        return {
-          ...obj,
-          name: values.name,
-          email: values.email,
-          phone: values.phone,
-          website: values.website,
-        };
-      }
-      return obj;
-    });
-    dispatch(setProfiles(newState));
+    dispatch(editProfile({ values: values, id: profile.id }));
     setIsModalOpen(false);
     // form.resetFields();
   };

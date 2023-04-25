@@ -12,14 +12,14 @@ import {
 } from "@ant-design/icons";
 import { Modal, Card, Form } from "antd";
 import ProfileForm from "../Form/ProfileForm";
-import { useSelector, useDispatch } from "react-redux";
-import { setProfiles } from "../../redux/actions/ProfileActions";
+import { useDispatch } from "react-redux";
+// import { setProfiles } from "../../redux/actions/ProfileActions";
+import { deleteProfile } from "../../features/profileSlice";
 const { Meta } = Card;
 const ProfileCard = ({ profile }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [form] = Form.useForm();
-  const profiles = useSelector((state) => state.allProfiles.profiles);
   const dispatch = useDispatch();
   // console.log(profile);
   const showModal = () => {
@@ -35,10 +35,14 @@ const ProfileCard = ({ profile }) => {
 
   const handleDelete = () => {
     console.log("delete", profile.id);
-    const filteredData = [...profiles].filter(
-      (element) => profile.id !== element.id
-    );
-    dispatch(setProfiles(filteredData));
+    // const filteredData = [...profiles].filter(
+    //   (element) => profile.id !== element.id
+    // );
+    // // console.log(filteredData);
+    // dispatch(setProfiles(filteredData));
+    // console.log(profiles);
+
+    dispatch(deleteProfile(profile.id));
   };
   return (
     <div>
