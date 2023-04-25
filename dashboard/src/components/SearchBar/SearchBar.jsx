@@ -1,7 +1,7 @@
 import { Input, Space } from "antd";
 import styles from "../SearchBar/SearchBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setProfiles } from "../../redux/actions/ProfileActions";
+import { setProfiles } from "../../features/profileSlice";
 import { fetchProfiles } from "../../Api/Api";
 const { Search } = Input;
 
